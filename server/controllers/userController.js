@@ -2,9 +2,7 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
 
-/**
- * POST /api/users/login
- */
+
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -24,9 +22,7 @@ export const loginUser = asyncHandler(async (req, res) => {
   });
 });
 
-/**
- * GET /api/users/:id
- */
+
 export const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select('-password').lean();
   if (!user) {
@@ -36,9 +32,7 @@ export const getUser = asyncHandler(async (req, res) => {
   res.json(user);
 });
 
-/**
- * PUT /api/users/:id (auth)
- */
+
 export const updateUser = asyncHandler(async (req, res) => {
   if (req.user._id.toString() !== req.params.id && !req.user.isAdmin) {
     res.status(403);
@@ -70,9 +64,7 @@ export const updateUser = asyncHandler(async (req, res) => {
 });
 
 
-/**
- * POST /api/users/register
- */
+
 export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, avatar } = req.body;
 

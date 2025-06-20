@@ -1,37 +1,4 @@
-// import React, { useContext, useState } from 'react';
-// import api from '../services/api';
-// import AuthContext from '../context/AuthContext';
-// import { useNavigate } from 'react-router-dom';
 
-// export default function Login() {
-//   const { login } = useContext(AuthContext);
-//   const [form, setForm] = useState({ email: '', password: '' });
-//   const [msg, setMsg] = useState('');
-//   const navigate = useNavigate();
-
-//   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const { data } = await api.post('/users/login', form);
-//       login(data);           // save token + user
-//       navigate('/');
-//     } catch (err) {
-//       setMsg('Login failed');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={onSubmit} className="max-w-sm mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
-//       <h2 className="text-xl font-bold mb-4">Login</h2>
-//       {msg && <p className="text-red-500">{msg}</p>}
-//       <input name="email" placeholder="Email" onChange={onChange} className="w-full p-2 mb-2 rounded bg-gray-100" />
-//       <input type="password" name="password" placeholder="Password" onChange={onChange} className="w-full p-2 mb-4 rounded bg-gray-100" />
-//       <button className="w-full py-2 bg-indigo-600 text-white rounded">Login</button>
-//     </form>
-//   );
-// }
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';

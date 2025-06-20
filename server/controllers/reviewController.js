@@ -2,9 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Review from '../models/Review.js';
 import Book from '../models/Book.js';
 
-/**
- * GET /api/reviews?bookId=xxx
- */
+
 export const getReviews = asyncHandler(async (req, res) => {
   const { bookId } = req.query;
   if (!bookId) {
@@ -20,10 +18,7 @@ export const getReviews = asyncHandler(async (req, res) => {
   res.json(reviews);
 });
 
-/**
- * POST /api/reviews (auth)
- * body: { bookId, rating, comment }
- */
+
 export const addReview = asyncHandler(async (req, res) => {
   const { bookId, rating, comment } = req.body;
   if (!bookId || !rating) {
@@ -31,7 +26,6 @@ export const addReview = asyncHandler(async (req, res) => {
     throw new Error('bookId and rating are required');
   }
 
-  // prevent duplicate
   const exists = await Review.findOne({ book: bookId, user: req.user._id });
   if (exists) {
     res.status(400);
@@ -45,7 +39,6 @@ export const addReview = asyncHandler(async (req, res) => {
     comment
   });
 
-  // recalculate aggregate stats
   const stats = await Review.aggregate([
     { $match: { book: review.book } },
     {
